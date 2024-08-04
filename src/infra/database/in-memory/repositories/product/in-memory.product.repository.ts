@@ -23,11 +23,10 @@ export class InMemoryProductRepository implements ProductRepository {
   }
 
   async getMany(filter: Filter): Promise<Product[]> {
-    this.productsMemory.find(
+    return this.productsMemory.filter(
       (prod) =>
-        prod.description === filter.description || prod.name === filter.name,
+        prod.description.match(filter.description) ||
+        prod.name.match(filter.name),
     );
-
-    return;
   }
 }

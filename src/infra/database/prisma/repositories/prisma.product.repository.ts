@@ -26,12 +26,18 @@ export class PrismaProductRepository implements ProductRepository {
       skip: filter.offset,
       take: filter.limit,
       where: {
-        name: {
-          contains: filter.name,
-        },
-        description: {
-          contains: filter.description,
-        },
+        OR: [
+          {
+            name: {
+              contains: filter.name,
+            },
+          },
+          {
+            description: {
+              contains: filter.description,
+            },
+          },
+        ],
       },
     });
 
