@@ -2,6 +2,7 @@ import { User } from '@/application/entities/user';
 import { UserRepository } from '@/application/repositories/user.repository';
 
 export class InMemoryUserRepository implements UserRepository {
+  private usersMemory: User[] = [];
   async create(user: User): Promise<User> {
     const response = new User({
       email: user.email,
@@ -10,6 +11,12 @@ export class InMemoryUserRepository implements UserRepository {
       updatedAt: new Date(),
     });
 
+    this.usersMemory.push(user);
+
     return response;
+  }
+
+  async getById(id: number): Promise<User | undefined> {
+    return this.usersMemory.find((user) => user.id === id);
   }
 }

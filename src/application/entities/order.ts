@@ -12,9 +12,15 @@ export interface OrderProps {
 export class Order {
   private props: OrderProps;
 
-  constructor(props: Replace<OrderProps, { createdAt?: Date }>) {
+  constructor(
+    props: Replace<
+      OrderProps,
+      { price?: number; discount?: number; createdAt?: Date }
+    >,
+  ) {
     this.props = {
       ...props,
+      price: props.price || 0,
       createdAt: props.createdAt || new Date(),
     };
   }

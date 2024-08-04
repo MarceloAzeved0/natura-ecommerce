@@ -20,6 +20,7 @@ export class PrismaUserMapper {
 
   public static toDomain(userPrismaData: PrismaUser) {
     return new User({
+      id: userPrismaData.id,
       name: userPrismaData.name,
       email: userPrismaData.email,
       createdAt: userPrismaData.createdAt,

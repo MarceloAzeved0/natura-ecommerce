@@ -7,8 +7,8 @@ import { GetManyDto } from '../dtos/product/getMany.dto';
 import { FindAllProductUseCase } from '@/application/use-cases/product/findAll.use-case';
 import { Product } from '@prisma/client';
 
-@Controller('Product')
-@ApiTags('Product')
+@Controller('product')
+@ApiTags('product')
 export class ProductController {
   constructor(
     private readonly createProductUseCase: CreateProductUseCase,
@@ -47,7 +47,7 @@ export class ProductController {
     status: 500,
     description: 'Internal server error.',
   })
-  async findMany(@Query() query: GetManyDto): Promise<Product[]> {
+  async findMany(@Query() query: GetManyDto): Promise<CreateProductDto[]> {
     const { name, description, limit, offset } = query;
 
     const products = await this.findAllProductUseCase.execute({
@@ -57,6 +57,6 @@ export class ProductController {
       offset: Number(offset),
     });
 
-    return products;
+    return products.map(ProductMapper.toDto);
   }
 }
