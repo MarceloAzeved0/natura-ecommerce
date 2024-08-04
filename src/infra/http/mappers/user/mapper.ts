@@ -1,5 +1,5 @@
 import { User } from '@/application/entities/user';
-import { CreateUserDto } from '../dtos/create.user.dto';
+import { CreateUserDto } from '../../dtos/user/create.dto';
 
 export class UserMapper {
   private constructor() {
