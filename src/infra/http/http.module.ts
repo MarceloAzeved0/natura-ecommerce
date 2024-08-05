@@ -10,6 +10,7 @@ import { OrderController } from './controllers/order.controller';
 import { FindByIdUserUseCase } from '@/application/use-cases/user/findById.use-case';
 import { CreateOrderProductUseCase } from '@/application/use-cases/order-product/create.use-case';
 import { OrderProductController } from './controllers/order-product.controller';
+import { ChangeQuantityOrderProductUseCase } from '@/application/use-cases/order-product/change-quantity.use-case';
 @Module({
   imports: [DatabaseModule],
   controllers: [
@@ -25,6 +26,7 @@ import { OrderProductController } from './controllers/order-product.controller';
     CreateOrderUseCase,
     FindByIdUserUseCase,
     CreateOrderProductUseCase,
+    ChangeQuantityOrderProductUseCase,
   ],
 })
 export class HttpModule {}

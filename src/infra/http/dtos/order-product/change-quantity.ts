@@ -1,18 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsNotEmpty, Min } from 'class-validator';
 
-export class CreateOrderProductDto {
+export class ChangeQuantityOrderProductDto {
+  @IsNotEmpty()
+  @IsInt()
+  @ApiProperty()
   id: number;
-
-  @IsNotEmpty()
-  @IsInt()
-  @ApiProperty()
-  productId: number;
-
-  @IsNotEmpty()
-  @IsInt()
-  @ApiProperty()
-  orderId: number;
 
   @IsNotEmpty()
   @IsInt()

@@ -18,4 +18,34 @@ export class PrismaOrderProductRepository implements OrderProductRepository {
 
     return PrismaOrderProductMapper.toDomain(data);
   }
+
+  async getById(id: number): Promise<OrderProduct | undefined> {
+    const data = await this.prismaService.orderProduct.findUnique({
+      where: { id },
+    });
+
+    if (!data) {
+      return;
+    }
+
+    return PrismaOrderProductMapper.toDomain(data);
+  }
+
+  async update(
+    id: number,
+    orderProduct: OrderProduct,
+  ): Promise<OrderProduct | undefined> {
+    const prismaOrderProduct = PrismaOrderProductMapper.toPrisma(orderProduct);
+
+    const data = await this.prismaService.orderProduct.update({
+      where: { id },
+      data: prismaOrderProduct,
+    });
+
+    if (!data) {
+      return;
+    }
+
+    return PrismaOrderProductMapper.toDomain(data);
+  }
 }

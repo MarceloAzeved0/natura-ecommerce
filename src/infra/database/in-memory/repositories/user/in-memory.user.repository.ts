@@ -11,7 +11,7 @@ export class InMemoryUserRepository implements UserRepository {
       updatedAt: new Date(),
     });
 
-    this.usersMemory.push(user);
+    this.usersMemory.push(response);
 
     return response;
   }
