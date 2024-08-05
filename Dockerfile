@@ -1,21 +1,30 @@
-# Dockerfile
-FROM node:20-alpine
+FROM node:20-alpine as builder
 
-# Set working directory
+# Create app directory
 WORKDIR /app
 
-# Install dependencies
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package*.json ./
+COPY yarn.lock ./
+COPY prisma ./prisma/
 
-# Copy the rest of the application
 COPY . .
 
-# Build the application
+RUN yarn install --frozen-lockfile
+RUN yarn prisma:generate
+
+# ---
+
 RUN yarn build
 
-# Expose the application port
+FROM node:20-alpine
+
+RUN apk --no-cache add curl
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/yarn.lock ./
+COPY --from=builder /app/dist ./dist
+
 EXPOSE 3000
 
-# Command to run the application
 CMD ["yarn", "start:prod"]

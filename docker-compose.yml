@@ -1,15 +1,15 @@
 version: '3.8'
 services:
-  # app:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - db
-  #   environment:
-  #     DATABASE_URL: "postgresql://postgres:password@db:5432/natura-ecommerce"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql://postgres:password@db:5432/natura-ecommerce"
 
   db:
     image: postgres:16
