@@ -6,7 +6,7 @@ Este projeto é uma plataforma de e-commerce inspirada na Natura.
 
 ## 2. Estrutura do banco de dados
 
-Para o projeto fui utilizado um banco de dados Postgres. Conforme diagrama ER:
+Para o projeto foi utilizado um banco de dados Postgres. Conforme diagrama ER:
 
 <img src="./docs/database-diagram.png" />
 
@@ -22,11 +22,11 @@ A camada entities contém as definições das entidades de domínio, que são os
 
 #### - Use-cases
 
-A camada use-cases define os casos de uso ou serviços da aplicação. Cada caso de uso representa uma operação específica que a aplicação pode realizar, orquestrando a interação entre entidades e repositórios para atender a uma necessidade do usuário.
+A camada use-cases define os casos de uso da aplicação. Cada caso de uso representa uma operação específica que a aplicação pode realizar, orquestrando a interação entre entidades e repositórios para atender a uma necessidade do usuário.
 
 #### - Repositories
 
-A camada repositories é responsável por abstrair o acesso a dados. Ela define interfaces para operações de armazenamento e recuperação de dados, permitindo que a camada de aplicação interaja com diferentes fontes de dados sem conhecer os detalhes específicos da implementação.
+A camada repositories é responsável por abstrair o acesso aos dados. Ela define interfaces para operações de armazenamento e recuperação de dados, permitindo que a camada de aplicação interaja com diferentes fontes de dados sem conhecer os detalhes específicos da implementação.
 
 ### Infra
 
@@ -42,7 +42,7 @@ Aqui temos a implementação do banco de dados. Neste projeto implementamos um b
 
 ### Test
 
-Aqui contemos os testes unitários e de integração da aplicação mantendo a mesma estrutura da <i>/src</i>. Foram realizados testes de unidade utilizando banco de dados in-memory. Testes de integração são executados em conjunto com o banco específico para testes configurado via <i>docker-compose-test.yml</i>.
+Aqui contém os testes unitários e de integração da aplicação mantendo a mesma estrutura da <i>/src</i>. Foram realizados testes de unidade utilizando banco de dados in-memory. Testes de integração são executados em conjunto com o banco específico para testes configurado via <i>docker-compose-test.yml</i>.
 
 ## Organização do repositório
 
@@ -103,7 +103,7 @@ DATABASE_URL="postgresql://postgres:password@localhost:5432/natura_ecommerce"
   docker-compose up
 ```
 
-## 5 - Endpoints da API
+## 5. Endpoints da API
 
 A documentação da API está disponível no Swagger. Para acessar a documentação, inicie o servidor e navegue até:
 
@@ -111,7 +111,7 @@ A documentação da API está disponível no Swagger. Para acessar a documentaç
   http://localhost:3000/api
 ```
 
-## 6 - Testes
+## 6. Testes
 
 Os testes de unidade e integraçãoforam escritos utilizando o Jest.
 
@@ -127,11 +127,11 @@ Para rodar o coverage:
   yarn test:cov
 ```
 
-## 7 - Considerações finais
+## 7. Considerações finais
 
 ### Decisões de Design
 
-- Clean Architecture: Escolhi uma implementação de Clean Architecture para manter a separação de responsabilidades e facilitar a manutenção e evolução do código.
+- Clean Architecture: Escolhi essa implementação para manter a separação de responsabilidades e facilitar a manutenção e evolução do código.
 - NestJS: Utilizei NestJS por sua robustez e suporte a TypeScript, além de sua arquitetura modular.
 - Prisma: Utilizei Prisma como ORM pela sua facilidade de uso e integrações com TypeScript.
 
@@ -141,7 +141,7 @@ Para rodar o coverage:
 - Adição de interfaces e classes para controlar e padronizar expections.
 - Adição de logs na aplicação.
 
-## 8 - Contato
+## 8. Contato
 
 Se tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato:
 
