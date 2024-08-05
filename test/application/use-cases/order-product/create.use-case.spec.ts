@@ -3,16 +3,19 @@ import {
   CreateOrderProductUseCase,
   CreateOrderProductUseCaseRequest,
 } from '@/application/use-cases/order-product/create.use-case';
-import { FindByIdUserUseCase } from '@/application/use-cases/user/findById.use-case';
 import { OrderProduct } from '@/application/entities/order-product';
+import { FindByIdProductUseCase } from '@/application/use-cases/product/findById.use-case';
+import { FindByIdOrderUseCase } from '@/application/use-cases/order/findById.use-case';
 
 export async function createOrderProduct(
   request: CreateOrderProductUseCaseRequest,
-  findByIdUserUseCase: FindByIdUserUseCase,
+  findByIdOrderUseCase: FindByIdOrderUseCase,
+  findByIdProductUseCase: FindByIdProductUseCase,
   orderProductRepo: InMemoryOrderProductRepository,
 ): Promise<OrderProduct> {
   const createProductUseCase = new CreateOrderProductUseCase(
-    findByIdUserUseCase,
+    findByIdOrderUseCase,
+    findByIdProductUseCase,
     orderProductRepo,
   );
 
@@ -22,9 +25,17 @@ export async function createOrderProduct(
 }
 
 describe('CreateOrderProductUseCase', () => {
-  const mockFindByIdUserUseCase = {
-    execute: jest.fn().mockResolvedValue({ id: 1, name: 'John Doe' }),
-  } as unknown as jest.Mocked<FindByIdUserUseCase>;
+  const mockFindByIdProductUseCase = {
+    execute: jest
+      .fn()
+      .mockResolvedValue({ id: 1, name: 'product', price: 1.99 }),
+  } as unknown as jest.Mocked<FindByIdProductUseCase>;
+
+  const mockFindByIdOrderUseCase = {
+    execute: jest
+      .fn()
+      .mockResolvedValue({ id: 1, descount: 3.0, price: 10.99 }),
+  } as unknown as jest.Mocked<FindByIdOrderUseCase>;
 
   it('should create a OrderProduct', async () => {
     const request: CreateOrderProductUseCaseRequest = {
@@ -36,7 +47,8 @@ describe('CreateOrderProductUseCase', () => {
     const ProductRepo = new InMemoryOrderProductRepository();
     const response = await createOrderProduct(
       request,
-      mockFindByIdUserUseCase,
+      mockFindByIdOrderUseCase,
+      mockFindByIdProductUseCase,
       ProductRepo,
     );
 

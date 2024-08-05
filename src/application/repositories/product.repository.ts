@@ -10,4 +10,5 @@ export type Filter = Partial<Product> & Pagination;
 
 export abstract class ProductRepository extends RepositoryBase<Product> {
   abstract getMany(filter: Filter): Promise<Product[]>;
+  abstract getById(id: number): Promise<Product | undefined>;
 }

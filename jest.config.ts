@@ -9,7 +9,7 @@ const config: Config = {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
   collectCoverageFrom: [
-    'src/application/**/*.{ts,tsx,js,jsx}', // Include all files in src directory with specific extensions
+    'src/**/*.{ts,tsx,js,jsx}', // Include all files in src directory with specific extensions
     '!src/**/*.d.ts', // Exclude TypeScript declaration files
   ],
   coverageDirectory: './coverage',

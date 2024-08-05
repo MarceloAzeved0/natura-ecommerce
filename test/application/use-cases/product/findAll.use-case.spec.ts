@@ -1,7 +1,7 @@
 import { InMemoryProductRepository } from '@/infra/database/in-memory/repositories/product/in-memory.product.repository';
 import { FindAllProductUseCase } from '@/application/use-cases/product/findAll.use-case';
-import { createProduct } from '@/application/use-cases/product/create.use-case.spec';
-import { CreateProductUseCaseRequest } from './create.use-case';
+import { createProduct } from '@test/application/use-cases/product/create.use-case.spec';
+import { CreateProductUseCaseRequest } from '../../../../src/application/use-cases/product/create.use-case';
 
 describe('FindAllProductUseCase', () => {
   it('find products with params', async () => {

@@ -11,6 +11,8 @@ import { FindByIdUserUseCase } from '@/application/use-cases/user/findById.use-c
 import { CreateOrderProductUseCase } from '@/application/use-cases/order-product/create.use-case';
 import { OrderProductController } from './controllers/order-product.controller';
 import { ChangeQuantityOrderProductUseCase } from '@/application/use-cases/order-product/change-quantity.use-case';
+import { FindByIdOrderUseCase } from '@/application/use-cases/order/findById.use-case';
+import { FindByIdProductUseCase } from '@/application/use-cases/product/findById.use-case';
 @Module({
   imports: [DatabaseModule],
   controllers: [
@@ -25,6 +27,8 @@ import { ChangeQuantityOrderProductUseCase } from '@/application/use-cases/order
     FindAllProductUseCase,
     CreateOrderUseCase,
     FindByIdUserUseCase,
+    FindByIdOrderUseCase,
+    FindByIdProductUseCase,
     CreateOrderProductUseCase,
     ChangeQuantityOrderProductUseCase,
   ],

@@ -17,4 +17,16 @@ export class PrismaOrderRepository implements OrderRepository {
 
     return PrismaOrderMapper.toDomain(data);
   }
+
+  async getById(id: number): Promise<Order | undefined> {
+    const data = await this.prismaService.order.findUnique({
+      where: { id },
+    });
+
+    if (!data) {
+      return;
+    }
+
+    return PrismaOrderMapper.toDomain(data);
+  }
 }

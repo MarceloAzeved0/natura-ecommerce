@@ -29,4 +29,8 @@ export class InMemoryProductRepository implements ProductRepository {
         prod.name.match(filter.name),
     );
   }
+
+  async getById(id: number): Promise<Product | undefined> {
+    return this.productsMemory.find((user) => user.id === id);
+  }
 }

@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UseCaseBase } from '../base/use-case.base';
 import { OrderProduct } from '@/application/entities/order-product';
 import { OrderProductRepository } from '@/application/repositories/order-product.repository';
-import { FindByIdUserUseCase } from '@/application/use-cases/user/findById.use-case';
+import { FindByIdProductUseCase } from '@/application/use-cases/product/findById.use-case';
+import { FindByIdOrderUseCase } from '@/application/use-cases/order/findById.use-case';
 
 export interface CreateOrderProductUseCaseRequest {
   orderId: number;
@@ -21,7 +22,8 @@ export class CreateOrderProductUseCase
     >
 {
   constructor(
-    private findByIdUserUseCase: FindByIdUserUseCase,
+    private findByIdOrderUseCase: FindByIdOrderUseCase,
+    private findByIdProductUseCase: FindByIdProductUseCase,
     private readonly OrderProductRepository: OrderProductRepository,
   ) {}
 
@@ -30,9 +32,19 @@ export class CreateOrderProductUseCase
   ): Promise<CreateOrderProductUseCaseResponse> {
     const { orderId, productId, quantity } = request;
 
-    // find product or fail
+    const product = await this.findByIdProductUseCase.execute({
+      id: productId,
+    });
 
-    // find order or fail
+    if (!product) {
+      throw new NotFoundException('Product not found');
+    }
+
+    const order = await this.findByIdOrderUseCase.execute({ id: orderId });
+
+    if (!order) {
+      throw new NotFoundException('Order not found');
+    }
 
     const orderProduct = new OrderProduct({ orderId, productId, quantity });
 

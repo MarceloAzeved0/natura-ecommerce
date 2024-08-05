@@ -43,4 +43,16 @@ export class PrismaProductRepository implements ProductRepository {
 
     return products.map(PrismaProductMapper.toDomain);
   }
+
+  async getById(id: number): Promise<Product | undefined> {
+    const data = await this.prismaService.product.findUnique({
+      where: { id },
+    });
+
+    if (!data) {
+      return;
+    }
+
+    return PrismaProductMapper.toDomain(data);
+  }
 }
