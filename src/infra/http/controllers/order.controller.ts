@@ -1,7 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateOrderUseCase } from '@/application/use-cases/order/create.use-case';
-import { Order } from '@prisma/client';
 import { CreateOrderDto } from '../dtos/order/create.dto';
 import { OrderMapper } from '../mappers/order/mapper';
 

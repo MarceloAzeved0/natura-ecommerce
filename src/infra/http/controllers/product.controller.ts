@@ -5,7 +5,6 @@ import { CreateProductDto } from '../dtos/product/create.dto';
 import { ProductMapper } from '../mappers/product/mapper';
 import { GetManyDto } from '../dtos/product/getMany.dto';
 import { FindAllProductUseCase } from '@/application/use-cases/product/findAll.use-case';
-import { Product } from '@prisma/client';
 
 @Controller('product')
 @ApiTags('product')

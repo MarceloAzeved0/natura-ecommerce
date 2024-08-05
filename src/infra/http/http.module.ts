@@ -8,15 +8,23 @@ import { FindAllProductUseCase } from '@/application/use-cases/product/findAll.u
 import { CreateOrderUseCase } from '@/application/use-cases/order/create.use-case';
 import { OrderController } from './controllers/order.controller';
 import { FindByIdUserUseCase } from '@/application/use-cases/user/findById.use-case';
+import { CreateOrderProductUseCase } from '@/application/use-cases/order-product/create.use-case';
+import { OrderProductController } from './controllers/order-product.controller';
 @Module({
   imports: [DatabaseModule],
-  controllers: [UserController, ProductController, OrderController],
+  controllers: [
+    UserController,
+    ProductController,
+    OrderController,
+    OrderProductController,
+  ],
   providers: [
     CreateUserUseCase,
     CreateProductUseCase,
     FindAllProductUseCase,
     CreateOrderUseCase,
     FindByIdUserUseCase,
+    CreateOrderProductUseCase,
   ],
 })
 export class HttpModule {}
