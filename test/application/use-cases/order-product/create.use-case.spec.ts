@@ -6,6 +6,7 @@ import {
 import { OrderProduct } from '@/application/entities/order-product';
 import { FindByIdProductUseCase } from '@/application/use-cases/product/findById.use-case';
 import { FindByIdOrderUseCase } from '@/application/use-cases/order/findById.use-case';
+import { NotFoundException } from '@nestjs/common';
 
 export async function createOrderProduct(
   request: CreateOrderProductUseCaseRequest,
@@ -57,5 +58,27 @@ describe('CreateOrderProductUseCase', () => {
     expect(response.quantity).toEqual(request.quantity);
     expect(response.createdAt).toBeInstanceOf(Date);
     expect(response.updatedAt).toBeInstanceOf(Date);
+  });
+
+  it('should receive error when order not found', async () => {
+    const mockFindByIdOrderUseCaseNotFound = {
+      execute: jest.fn().mockResolvedValue(undefined),
+    } as unknown as jest.Mocked<FindByIdOrderUseCase>;
+
+    const request: CreateOrderProductUseCaseRequest = {
+      orderId: 99,
+      productId: 1,
+      quantity: 1,
+    };
+
+    const ProductRepo = new InMemoryOrderProductRepository();
+    await expect(
+      createOrderProduct(
+        request,
+        mockFindByIdOrderUseCaseNotFound,
+        mockFindByIdProductUseCase,
+        ProductRepo,
+      ),
+    ).rejects.toThrow(NotFoundException);
   });
 });

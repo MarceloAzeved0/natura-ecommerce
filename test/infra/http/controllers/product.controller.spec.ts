@@ -3,7 +3,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { HttpModule } from '@/infra/http/http.module';
 
-describe('OrderProductController (e2e)', () => {
+describe('ProductController (e2e)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
@@ -15,17 +15,28 @@ describe('OrderProductController (e2e)', () => {
     await app.init();
   });
 
-  it('should return 200 when create order product', () => {
+  it('should return 200 when create product', () => {
     return request(app.getHttpServer())
-      .post('/order-product')
-      .send({ orderId: 1, productId: 2, quantity: 3 })
+      .post('/product')
+      .send({
+        name: 'Teste product',
+        description: 'string',
+        price: 0,
+        discount: 0,
+        imageURL: 'string',
+      })
       .expect(HttpStatus.CREATED);
   });
 
-  it('should return error when not found product', () => {
+  it('should return products list', () => {
     return request(app.getHttpServer())
-      .post('/order-product')
-      .send({ orderId: 1, productId: -1, quantity: 3 })
-      .expect(HttpStatus.NOT_FOUND);
+      .get('/product')
+      .query({
+        name: 'Teste',
+        description: 'string',
+        limit: 10,
+        offset: 0,
+      })
+      .expect(HttpStatus.OK);
   });
 });

@@ -1,0 +1,15 @@
+networks:
+  postgres:
+    driver: bridge
+
+services:
+  test-db-natura-ecommerce:
+    image: postgres
+    environment:
+      POSTGRES_DB: postgres-test
+      POSTGRES_USER: postgres_admin
+      POSTGRES_PASSWORD: postgres_pwd
+    ports:
+      - 5445:5432
+    networks:
+      - postgres

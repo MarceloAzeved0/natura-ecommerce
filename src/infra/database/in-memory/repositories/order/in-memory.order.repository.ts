@@ -12,7 +12,7 @@ export class InMemoryOrderRepository implements OrderRepository {
       updatedAt: new Date(),
     });
 
-    this.ordersMemory.push(order);
+    this.ordersMemory.push(response);
 
     return response;
   }
