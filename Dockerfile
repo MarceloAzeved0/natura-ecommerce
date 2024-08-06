@@ -11,10 +11,11 @@ COPY . .
 
 RUN yarn install --frozen-lockfile
 RUN yarn prisma:generate
-
 # ---
 
 RUN yarn build
+
+RUN yarn prisma:deploy
 
 FROM node:20-alpine
 

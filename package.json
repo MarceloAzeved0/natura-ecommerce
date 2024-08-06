@@ -19,6 +19,7 @@
     "posttest": "yarn docker:database:test:down",
     "dotenv:test": "dotenv -e .env.test -- npx prisma db push",
     "prisma:generate": "prisma generate",
+    "prisma:deploy": "prisma migrate deploy",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:changed": "jest --onlyChanged",
