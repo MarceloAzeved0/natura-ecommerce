@@ -4,6 +4,10 @@
 
 Este projeto é uma plataforma de e-commerce inspirada na Natura.
 
+A API encontra-se disponível em <a href="https://natura-ecommerce.onrender.com/api#/">https://natura-ecommerce.onrender.com</a>.
+
+OBS. <b>Hospedagem gratuita que pode pode conter oscilações.</b> Qualquer problema encontrado estou disponivel para contato.
+
 ## 2. Estrutura do banco de dados
 
 Para o projeto foi utilizado um banco de dados Postgres. Conforme diagrama ER:
