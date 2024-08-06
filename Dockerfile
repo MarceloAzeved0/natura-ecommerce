@@ -15,8 +15,6 @@ RUN yarn prisma:generate
 
 RUN yarn build
 
-RUN yarn prisma:deploy
-
 FROM node:20-alpine
 
 RUN apk --no-cache add curl
