@@ -29,4 +29,16 @@ export class PrismaUsersRepository implements UserRepository {
 
     return PrismaUserMapper.toDomain(data);
   }
+
+  async getByEmail(email: string): Promise<User | undefined> {
+    const data = await this.prismaService.user.findFirst({
+      where: { email },
+    });
+
+    if (!data) {
+      return;
+    }
+
+    return PrismaUserMapper.toDomain(data);
+  }
 }

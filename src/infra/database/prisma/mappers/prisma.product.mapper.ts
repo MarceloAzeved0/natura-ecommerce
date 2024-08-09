@@ -23,6 +23,7 @@ export class PrismaProductMapper {
 
   public static toDomain(productPrismaData: PrismaProduct) {
     return new Product({
+      id: productPrismaData.id,
       price: productPrismaData.price,
       imageURL: productPrismaData.imageURL,
       name: productPrismaData.name,

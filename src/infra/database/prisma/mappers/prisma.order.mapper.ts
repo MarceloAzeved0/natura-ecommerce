@@ -21,6 +21,7 @@ export class PrismaOrderMapper {
 
   public static toDomain(orderPrismaData: PrismaOrder) {
     return new Order({
+      id: orderPrismaData.id,
       price: orderPrismaData.price,
       userId: orderPrismaData.userId,
       discount: orderPrismaData.discount,

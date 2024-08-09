@@ -1,12 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNotEmpty } from 'class-validator';
+import { IsArray, IsInt, IsNotEmpty } from 'class-validator';
 
+class IProductOrder {
+  @ApiProperty()
+  id: number;
+  @ApiProperty()
+  quantity: number;
+}
 export class CreateOrderDto {
   id: number;
 
-  @IsNotEmpty()
-  @IsInt()
-  @ApiProperty()
   userId: number;
 
   discount: number;
@@ -15,4 +18,16 @@ export class CreateOrderDto {
 
   createdAt: Date;
   updatedAt?: Date;
+}
+
+export class CreateOrderDtoRequest {
+  @IsNotEmpty()
+  @IsInt()
+  @ApiProperty()
+  userId: number;
+
+  @IsNotEmpty()
+  @IsArray()
+  @ApiProperty({ type: [IProductOrder] })
+  productIds: IProductOrder[];
 }

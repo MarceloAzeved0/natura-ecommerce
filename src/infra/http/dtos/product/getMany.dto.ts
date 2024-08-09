@@ -1,17 +1,23 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsInt, IsNotEmpty, Min } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, Min } from 'class-validator';
+import { CreateProductDto } from './create.dto';
+
+export class GetManyDtoResponse {
+  total: number;
+  products: CreateProductDto[];
+}
 
 export class GetManyDto {
   id: number;
 
-  @IsNotEmpty()
-  @ApiProperty()
-  name: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  name?: string;
 
-  @IsNotEmpty()
-  @ApiProperty()
-  description: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  description?: string;
 
   @ApiProperty()
   @IsNotEmpty()

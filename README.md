@@ -104,6 +104,7 @@ DATABASE_URL="postgresql://postgres:password@localhost:5432/natura_ecommerce"
 4. Inicie o servidor:
 
 ```sh
+  yarn start #ou
   docker-compose up
 ```
 

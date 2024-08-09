@@ -3,23 +3,30 @@ import { UseCaseBase } from '../base/use-case.base';
 import { User } from '../../entities/user';
 import { UserRepository } from '@/application/repositories/user.repository';
 
-export interface CreateUserUseCaseRequest {
+export interface GetOrCreateUserUseCaseRequest {
   name: string;
   email: string;
 }
 
-export type CreateUserUseCaseResponse = User;
+export type GetOrCreateUserUseCaseResponse = User;
 
 @Injectable()
-export class CreateUserUseCase
-  implements UseCaseBase<CreateUserUseCaseRequest, CreateUserUseCaseResponse>
+export class GetOrCreateUserUseCase
+  implements
+    UseCaseBase<GetOrCreateUserUseCaseRequest, GetOrCreateUserUseCaseResponse>
 {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(
-    request: CreateUserUseCaseRequest,
-  ): Promise<CreateUserUseCaseResponse> {
+    request: GetOrCreateUserUseCaseRequest,
+  ): Promise<GetOrCreateUserUseCaseResponse> {
     const { name, email } = request;
+
+    const existingUser = await this.userRepository.getByEmail(email);
+
+    if (existingUser) {
+      return existingUser;
+    }
 
     const user = new User({
       name,

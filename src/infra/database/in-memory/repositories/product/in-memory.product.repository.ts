@@ -1,6 +1,7 @@
 import { Product } from '@/application/entities/product';
 import {
   ProductRepository,
+  GetManyResponse,
   Filter,
 } from '@/application/repositories/product.repository';
 
@@ -22,12 +23,14 @@ export class InMemoryProductRepository implements ProductRepository {
     return response;
   }
 
-  async getMany(filter: Filter): Promise<Product[]> {
-    return this.productsMemory.filter(
+  async getMany(filter: Filter): Promise<GetManyResponse> {
+    const products = this.productsMemory.filter(
       (prod) =>
         prod.description.match(filter.description) ||
         prod.name.match(filter.name),
     );
+
+    return { products, total: this.productsMemory.length };
   }
 
   async getById(id: number): Promise<Product | undefined> {

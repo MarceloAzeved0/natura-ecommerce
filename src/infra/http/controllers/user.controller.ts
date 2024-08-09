@@ -1,13 +1,15 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateUserUseCase } from '@/application/use-cases/user/create.use-case';
+import { GetOrCreateUserUseCase } from '@/application/use-cases/user/get-or-create.use-case';
 import { CreateUserDto } from '../dtos/user/create.dto';
 import { UserMapper } from '../mappers/user/mapper';
 
 @Controller('user')
 @ApiTags('user')
 export class UserController {
-  constructor(private readonly createUserUseCase: CreateUserUseCase) {}
+  constructor(
+    private readonly getOrCreateUserUseCase: GetOrCreateUserUseCase,
+  ) {}
 
   @Post()
   @ApiResponse({
@@ -21,7 +23,7 @@ export class UserController {
   async create(@Body() body: CreateUserDto): Promise<CreateUserDto> {
     const { name, email } = body;
 
-    const user = await this.createUserUseCase.execute({
+    const user = await this.getOrCreateUserUseCase.execute({
       name,
       email,
     });

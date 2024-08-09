@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Product } from '@/application/entities/product';
 import {
   ProductRepository,
+  GetManyResponse,
   Pagination,
 } from '@/application/repositories/product.repository';
 import { PrismaService } from '../prisma.service';
@@ -21,27 +22,49 @@ export class PrismaProductRepository implements ProductRepository {
     return PrismaProductMapper.toDomain(data);
   }
 
-  async getMany(filter: Partial<Product> & Pagination): Promise<Product[]> {
+  async getMany(
+    filter: Partial<Product> & Pagination,
+  ): Promise<GetManyResponse> {
+    let where = {};
+    const filters = [];
+
+    if (filter.name) {
+      filters.push({
+        name: {
+          contains: filter.name,
+        },
+      });
+    }
+
+    if (filter.description) {
+      filters.push({
+        description: {
+          contains: filter.description,
+        },
+      });
+    }
+
+    if (filters.length > 0) {
+      where = {
+        OR: filters,
+      };
+    }
+
     const products = await this.prismaService.product.findMany({
       skip: filter.offset,
       take: filter.limit,
-      where: {
-        OR: [
-          {
-            name: {
-              contains: filter.name,
-            },
-          },
-          {
-            description: {
-              contains: filter.description,
-            },
-          },
-        ],
+      orderBy: {
+        createdAt: 'asc',
       },
+      where,
     });
 
-    return products.map(PrismaProductMapper.toDomain);
+    const count = await this.prismaService.product.count({ where });
+
+    return {
+      products: products.map(PrismaProductMapper.toDomain),
+      total: count,
+    };
   }
 
   async getById(id: number): Promise<Product | undefined> {

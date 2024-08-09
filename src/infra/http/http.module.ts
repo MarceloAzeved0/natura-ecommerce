@@ -1,6 +1,6 @@
 import { UserController } from './controllers/user.controller';
 import { Module } from '@nestjs/common';
-import { CreateUserUseCase } from '@/application/use-cases/user/create.use-case';
+import { GetOrCreateUserUseCase } from '@/application/use-cases/user/get-or-create.use-case';
 import { DatabaseModule } from '../database/database.module';
 import { ProductController } from './controllers/product.controller';
 import { CreateProductUseCase } from '@/application/use-cases/product/create.use-case';
@@ -22,7 +22,7 @@ import { FindByIdProductUseCase } from '@/application/use-cases/product/findById
     OrderProductController,
   ],
   providers: [
-    CreateUserUseCase,
+    GetOrCreateUserUseCase,
     CreateProductUseCase,
     FindAllProductUseCase,
     CreateOrderUseCase,

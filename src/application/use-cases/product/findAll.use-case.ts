@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { UseCaseBase } from '../base/use-case.base';
-import { Product } from '../../entities/product';
-import { ProductRepository } from '@/application/repositories/product.repository';
+import {
+  ProductRepository,
+  GetManyResponse,
+} from '@/application/repositories/product.repository';
 
 export interface FindAllProductUseCaseRequest {
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
   limit: number;
   offset: number;
 }
 
-export type FindAllProductUseCaseResponse = Product[];
+export type FindAllProductUseCaseResponse = GetManyResponse;
 
 @Injectable()
 export class FindAllProductUseCase

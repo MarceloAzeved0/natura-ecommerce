@@ -2,7 +2,7 @@ import { InMemoryUserRepository } from '@/infra/database/in-memory/repositories/
 import {
   CreateUserUseCase,
   CreateUserUseCaseRequest,
-} from '@/application/use-cases/user/create.use-case';
+} from '@/application/use-cases/user/get-or-create.use-case';
 
 describe('CreateUserUseCase', () => {
   it('should create a user', async () => {

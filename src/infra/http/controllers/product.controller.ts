@@ -3,7 +3,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateProductUseCase } from '@/application/use-cases/product/create.use-case';
 import { CreateProductDto } from '../dtos/product/create.dto';
 import { ProductMapper } from '../mappers/product/mapper';
-import { GetManyDto } from '../dtos/product/getMany.dto';
+import { GetManyDto, GetManyDtoResponse } from '../dtos/product/getMany.dto';
 import { FindAllProductUseCase } from '@/application/use-cases/product/findAll.use-case';
 
 @Controller('product')
@@ -46,16 +46,16 @@ export class ProductController {
     status: 500,
     description: 'Internal server error.',
   })
-  async findMany(@Query() query: GetManyDto): Promise<CreateProductDto[]> {
+  async findMany(@Query() query: GetManyDto): Promise<GetManyDtoResponse> {
     const { name, description, limit, offset } = query;
 
-    const products = await this.findAllProductUseCase.execute({
+    const { products, total } = await this.findAllProductUseCase.execute({
       description,
       name,
       limit: Number(limit),
       offset: Number(offset),
     });
 
-    return products.map(ProductMapper.toDto);
+    return { products: products.map(ProductMapper.toDto), total };
   }
 }
