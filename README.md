@@ -104,8 +104,14 @@ DATABASE_URL="postgresql://postgres:password@localhost:5432/natura_ecommerce"
 4. Inicie o servidor:
 
 ```sh
-  yarn start #ou
-  docker-compose up
+  docker-compose up #ou
+  yarn start 
+```
+
+5. (Opcional) Seed de produtos:
+
+```sh
+  yarn prisma:seed
 ```
 
 ## 5. Endpoints da API
@@ -143,7 +149,7 @@ Para rodar o coverage:
 ### Melhorias futuras
 
 - Autenticação e Autorização: Implementar autenticação e autorização para restringir o acesso aos endpoints.
-- Adição de interfaces e classes para controlar e padronizar expections.
+- Adição de interfaces e classes para controlar e padronizar exceptions.
 - Adição de logs na aplicação.
 
 ## 8. Contato
