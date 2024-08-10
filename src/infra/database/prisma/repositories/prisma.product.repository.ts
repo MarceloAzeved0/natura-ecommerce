@@ -32,6 +32,7 @@ export class PrismaProductRepository implements ProductRepository {
       filters.push({
         name: {
           contains: filter.name,
+          mode: 'insensitive',
         },
       });
     }
@@ -40,6 +41,7 @@ export class PrismaProductRepository implements ProductRepository {
       filters.push({
         description: {
           contains: filter.description,
+          mode: 'insensitive',
         },
       });
     }
