@@ -20,12 +20,11 @@
     "posttest": "yarn docker:database:test:down",
     "dotenv:test": "dotenv -e .env.test -- npx prisma db push",
     "prisma:generate": "prisma generate",
+    "test:watch": "yarn test --watch",
+    "test:changed": "yarn test --onlyChanged",
+    "test:cov": "yarn test --coverage",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:changed": "jest --onlyChanged",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

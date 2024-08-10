@@ -32,9 +32,11 @@ describe('FindAllProductUseCase', () => {
 
     console.log(response);
 
-    expect(response.length).toBeGreaterThanOrEqual(1);
-    expect(response[0].description).toContain(filterParams.description);
-    expect(response[0].name).toContain(filterParams.name);
+    expect(response.total).toBeGreaterThanOrEqual(1);
+    expect(response.products[0].description).toContain(
+      filterParams.description,
+    );
+    expect(response.products[0].name).toContain(filterParams.name);
   });
 
   it('find products only description filter', async () => {
@@ -65,7 +67,9 @@ describe('FindAllProductUseCase', () => {
 
     console.log(response);
 
-    expect(response.length).toBeGreaterThanOrEqual(1);
-    expect(response[0].description).toContain(filterParams.description);
+    expect(response.total).toBeGreaterThanOrEqual(1);
+    expect(response.products[0].description).toContain(
+      filterParams.description,
+    );
   });
 });

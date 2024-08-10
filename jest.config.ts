@@ -3,6 +3,7 @@ import { compilerOptions } from './tsconfig.json';
 import { Config } from 'jest';
 
 const config: Config = {
+  setupFiles: ['<rootDir>/test/setup.ts'],
   moduleFileExtensions: ['js', 'json', 'ts'],
   testRegex: '.*\\.spec\\.ts$',
   transform: {

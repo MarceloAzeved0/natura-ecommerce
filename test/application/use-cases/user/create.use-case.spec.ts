@@ -1,15 +1,15 @@
 import { InMemoryUserRepository } from '@/infra/database/in-memory/repositories/user/in-memory.user.repository';
 import {
-  CreateUserUseCase,
-  CreateUserUseCaseRequest,
+  GetOrCreateUserUseCase,
+  GetOrCreateUserUseCaseRequest,
 } from '@/application/use-cases/user/get-or-create.use-case';
 
 describe('CreateUserUseCase', () => {
   it('should create a user', async () => {
     const userRepo = new InMemoryUserRepository();
-    const createUserUseCase = new CreateUserUseCase(userRepo);
+    const createUserUseCase = new GetOrCreateUserUseCase(userRepo);
 
-    const request: CreateUserUseCaseRequest = {
+    const request: GetOrCreateUserUseCaseRequest = {
       email: 'user@example',
       name: 'John Smith',
     };
